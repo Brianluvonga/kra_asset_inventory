@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27591461586",
+    "project_id": "kraassetinventory",
+    "storage_bucket": "kraassetinventory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27591461586:android:82fc20cb9fc5144c0e3b0b",
+        "android_client_info": {
+          "package_name": "com.example.asset_inventory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27591461586-ig7gosdj170ee5nqe7g67h4asvb1323n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiQkJ4WTOL3_njlr8lgT9OFg4cwwWQ9SE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27591461586-ig7gosdj170ee5nqe7g67h4asvb1323n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
