@@ -10,7 +10,6 @@ class DeploymentModel {
   String? department;
   String? station;
   String? floor;
-
   String? ictOfficerName;
 
   DeploymentModel();
@@ -39,7 +38,7 @@ class DeploymentModel {
       'department': department,
       'station': station,
       'floor': floor,
-      'displayName': ictOfficerName,
+      'ictOfficerName': ictOfficerName,
     };
   }
 }

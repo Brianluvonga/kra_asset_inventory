@@ -1,4 +1,3 @@
-import 'package:asset_inventory/pages/asset/records/faulty_Assets.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/cpu.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/ipPhones.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/laptop.dart';

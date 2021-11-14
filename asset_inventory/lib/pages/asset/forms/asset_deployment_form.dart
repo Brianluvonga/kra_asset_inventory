@@ -1,11 +1,8 @@
 import 'dart:io';
-
-import 'package:asset_inventory/pages/asset/api/asset_api.dart';
 import 'package:asset_inventory/pages/asset/deployment/api/deployment_api.dart';
 import 'package:asset_inventory/pages/asset/deployment/deployment_model.dart';
 import 'package:asset_inventory/pages/asset/deployment/feed/deployment_feed.dart';
 import 'package:asset_inventory/pages/asset/deployment/notifier/deploy_notifier.dart';
-import 'package:asset_inventory/pages/asset/notifier/asset_notifier.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';

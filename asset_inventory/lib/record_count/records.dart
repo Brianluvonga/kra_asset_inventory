@@ -1,16 +1,12 @@
 import 'package:asset_inventory/api/ict_officer_api.dart';
-import 'package:asset_inventory/pages/asset/records/asset_captured_record.dart';
-import 'package:asset_inventory/pages/asset/records/assets_In_Use.dart';
-import 'package:asset_inventory/pages/asset/records/deployed_asset_records.dart';
-import 'package:asset_inventory/pages/asset/records/faulty_Assets.dart';
-import 'package:asset_inventory/pages/asset/records/obsolete_records.dart';
-import 'package:asset_inventory/pages/asset/records/record_types/laptop.dart';
-import 'package:asset_inventory/pages/asset/records/record_types/printer.dart';
-import 'package:asset_inventory/pages/asset/records/record_types/switch.dart';
-import 'package:asset_inventory/pages/asset/records/record_types/vdi.dart';
+import 'package:asset_inventory/pages/asset/records/deployed_details/check_deployment_details.dart';
+import 'package:asset_inventory/pages/asset/records/grouped/asset_captured_record.dart';
+import 'package:asset_inventory/pages/asset/records/grouped/assets_In_Use.dart';
+import 'package:asset_inventory/pages/asset/records/grouped/deployed_asset_records.dart';
+import 'package:asset_inventory/pages/asset/records/grouped/faulty_Assets.dart';
+import 'package:asset_inventory/pages/asset/records/grouped/obsolete_records.dart';
 import 'package:asset_inventory/pages/ictOfficer/login.dart';
 import 'package:asset_inventory/pages/ictOfficer/notifier/ictOfficer_notifier.dart';
-import 'package:asset_inventory/pages/settings/profile.dart';
 import 'package:asset_inventory/record_count/record_types.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -364,15 +360,15 @@ class _RecordssectionState extends State<Recordssection> {
             ),
             Divider(),
             ListTile(
-              title: Text('Settings'),
+              title: Text('Deployment Details'),
               leading: Icon(Icons.settings, color: Colors.red[600]),
               onTap: () {
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (BuildContext context) => ProfileFeed(),
-                //   ),
-                // );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CheckDeploymentDetails(),
+                  ),
+                );
               },
             ),
             Divider(),
