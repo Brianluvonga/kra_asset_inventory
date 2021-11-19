@@ -31,6 +31,9 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
             autovalidateMode: AutovalidateMode.always,
             child: Column(
               children: <Widget>[
+                SizedBox(
+                  height: 60,
+                ),
                 _barcodeField(),
               ],
             ),
@@ -106,7 +109,11 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("Barcode Details", textAlign: TextAlign.center),
-          content: (barcodeDetails()),
+          insetPadding: EdgeInsets.symmetric(horizontal: 100),
+          content: Container(
+            width: 100,
+            child: barcodeDetails(),
+          ),
           actions: <Widget>[
             TextButton(
               child: Text('Ok'),
@@ -137,6 +144,7 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
 
   Widget barcodeDetails() {
     return Container(
+      width: 80,
       child: StreamBuilder(
         stream: checkBarcode(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -145,10 +153,9 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
               columns: [
                 DataColumn(
                     label: Text('DateDeployed', style: TextStyle(fontSize: 8))),
+                DataColumn(label: Text('Pin', style: TextStyle(fontSize: 8))),
                 DataColumn(
-                    label: Text('UserPin', style: TextStyle(fontSize: 8))),
-                DataColumn(
-                    label: Text('Department', style: TextStyle(fontSize: 8))),
+                    label: Text('Depart', style: TextStyle(fontSize: 8))),
                 DataColumn(
                     label: Text('DeployedBy', style: TextStyle(fontSize: 8))),
               ],
@@ -162,7 +169,7 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
                             Text(e['userPIN'], style: TextStyle(fontSize: 8))),
                         DataCell(Text(e['department'],
                             style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['displayName'],
+                        DataCell(Text(e['ictOfficerName'],
                             style: TextStyle(fontSize: 8))),
                       ],
                     ),
@@ -187,60 +194,4 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
 //query deployment database to fetch details of asset being used
   CollectionReference assetsCaptured =
       FirebaseFirestore.instance.collection('Deployment');
-
-  // Widget scanAssetDetails() {
-  //   return Card(
-  //     elevation: 8.0,
-  //     shadowColor: Colors.black,
-  //     child: Container(
-  //       height: 100,
-  //       width: 90,
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(15.0),
-  //       ),
-  //       child: StreamBuilder<QuerySnapshot>(
-  //         stream: countVDIs(),
-  //         builder: (context, snapshot) {
-  //           if (snapshot.hasData) {
-  //             return Container(
-  //               child: Center(
-  //                 child: ListView(
-  //                   children: <Widget>[
-  //                     ListTile(
-  //                       title: Text(
-  //                         "Scan Asset",
-  //                         textAlign: TextAlign.center,
-  //                       ),
-  //                       subtitle: Text(
-  //                         snapshot.data!.size.toString(),
-  //                         textAlign: TextAlign.center,
-  //                         style:
-  //                             TextStyle(color: Color(0xff2a0404), fontSize: 30),
-  //                       ),
-  //                       onTap: () {
-  //                         Navigator.push(
-  //                           context,
-  //                           MaterialPageRoute(
-  //                             builder: (BuildContext context) => ViewNoOfVDIs(),
-  //                           ),
-  //                         );
-  //                       },
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             );
-  //           } else {
-  //             return Center(
-  //               child: CircularProgressIndicator(
-  //                 color: Colors.red[600],
-  //                 // value: 0,
-  //               ),
-  //             );
-  //           }
-  //         },
-  //       ),
-  //     ),
-  //   );
-  // }
 }
