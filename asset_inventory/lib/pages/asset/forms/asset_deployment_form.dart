@@ -242,6 +242,8 @@ class _AssetDeploymentFormState extends State<AssetDeploymentForm> {
                   ,
                   SizedBox(height: 0),
                   _barcodeField(),
+                  // SizedBox(height: 10),
+                  // _secondbarcodeField(),
                   SizedBox(height: 10),
                   _dateOfIssue(),
                   SizedBox(height: 10),
@@ -724,4 +726,38 @@ class _AssetDeploymentFormState extends State<AssetDeploymentForm> {
       },
     );
   }
+
+  // Widget _secondbarcodeField() {
+  //   return TextFormField(
+  //     decoration: InputDecoration(
+  //         enabledBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  //           borderSide: BorderSide(width: 1, color: Colors.black),
+  //         ),
+  //         focusedBorder: OutlineInputBorder(
+  //           borderRadius: BorderRadius.all(Radius.circular(32.0)),
+  //           borderSide: BorderSide(width: 1, color: Colors.black),
+  //         ),
+  //         suffixIcon: Icon(
+  //           Icons.photo_camera,
+  //           color: Colors.black,
+  //         ),
+  //         contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+  //         filled: true,
+  //         hintText: 'Scan Second Asset Barcode',
+  //         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+  //         labelStyle: TextStyle(color: Colors.white)),
+  //     keyboardType: TextInputType.name,
+  //     style: TextStyle(fontSize: 16, color: Colors.black, fontFamily: 'times'),
+  //     cursorColor: Colors.white,
+  //     onSaved: (String? value) {
+  //       _deployment.second_barcode = value;
+  //     },
+  //     controller: barcodeController,
+  //     onTap: () {
+  //       scanBarcode();
+  //       FocusScope.of(context).requestFocus(new FocusNode());
+  //     },
+  //   );
+  // }
 }

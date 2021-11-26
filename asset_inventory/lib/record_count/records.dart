@@ -1,4 +1,5 @@
 import 'package:asset_inventory/api/ict_officer_api.dart';
+import 'package:asset_inventory/pages/asset/fetch_Asset_Details/asset_details.dart';
 import 'package:asset_inventory/pages/asset/records/deployed_details/check_deployment_details.dart';
 import 'package:asset_inventory/pages/asset/records/grouped/asset_captured_record.dart';
 import 'package:asset_inventory/pages/asset/records/grouped/assets_In_Use.dart';
@@ -31,8 +32,8 @@ class _RecordssectionState extends State<Recordssection> {
       elevation: 8.0,
       shadowColor: Colors.black,
       child: Container(
-        height: 120,
-        width: 185,
+        height: 180,
+        width: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -53,7 +54,7 @@ class _RecordssectionState extends State<Recordssection> {
                           snapshot.data!.size.toString(),
                           textAlign: TextAlign.center,
                           style:
-                              TextStyle(color: Color(0xff2a0404), fontSize: 35),
+                              TextStyle(color: Color(0xff2a0404), fontSize: 45),
                         ),
                         onTap: () {
                           Navigator.push(
@@ -110,8 +111,8 @@ class _RecordssectionState extends State<Recordssection> {
       elevation: 8.0,
       shadowColor: Colors.black,
       child: Container(
-        height: 120,
-        width: 185,
+        height: 180,
+        width: 300,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -360,13 +361,13 @@ class _RecordssectionState extends State<Recordssection> {
             ),
             Divider(),
             ListTile(
-              title: Text('Deployment Details'),
+              title: Text('Asset Details'),
               leading: Icon(Icons.settings, color: Colors.red[600]),
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (BuildContext context) => CheckDeploymentDetails(),
+                    builder: (BuildContext context) => CheckAssetEntryDetails(),
                   ),
                 );
               },
@@ -393,23 +394,9 @@ class _RecordssectionState extends State<Recordssection> {
         clipBehavior: Clip.none,
         fit: StackFit.loose,
         children: <Widget>[
-          ClipPath(
-            // clipper: ClippingClass(),
-            child: Container(
-              width: double.infinity,
-              height: MediaQuery.of(context).size.height * 2 / 7,
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [Colors.white, Colors.white],
-                ),
-              ),
-            ),
-          ),
           Positioned(
             left: 10,
-            top: 150,
+            top: 470,
             right: 2,
             child: Column(
               children: <Widget>[
@@ -431,7 +418,7 @@ class _RecordssectionState extends State<Recordssection> {
           ),
           Positioned(
             left: 10,
-            top: 10,
+            top: 30,
             right: 2,
             child: Column(
               children: <Widget>[
@@ -442,7 +429,6 @@ class _RecordssectionState extends State<Recordssection> {
                     children: <Widget>[
                       Row(children: <Widget>[
                         assetsCapturedCard(),
-                        assetsDeployedCard(),
                       ]),
                     ],
                   ),
@@ -450,24 +436,26 @@ class _RecordssectionState extends State<Recordssection> {
               ],
             ),
           ),
-          // Container(
-          //   width: double.infinity,
-          //   height: MediaQuery.of(context).size.height * 2 / 7,
-          //   child: Column(
-          //     children: <Widget>[
-          //       GestureDetector(
-          //         behavior: HitTestBehavior.translucent,
-          //         child: Row(
-          //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //           children: <Widget>[
-          //             assetsCapturedCard(),
-          //             assetsDeployedCard(),
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
+          Positioned(
+            left: 10,
+            top: 250,
+            right: 2,
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(children: <Widget>[
+                        assetsDeployedCard(),
+                      ]),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

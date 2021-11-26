@@ -5,9 +5,15 @@ class SuspendedRegistration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Registration Suspended"),
+    return Scaffold(
+      appBar: new AppBar(
+        title: Text("Registration"),
+        backgroundColor: Colors.red[600],
+        centerTitle: true,
+      ),
+      body: Center(
+        child: Text("Sorry Registration Suspended",
+            style: TextStyle(fontSize: 20)),
       ),
     );
   }

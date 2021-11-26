@@ -36,6 +36,7 @@ class _DeployedAssetsRecordsState extends State<DeployedAssetsRecords> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               return DataTable(
+                columnSpacing: 20,
                 columns: [
                   DataColumn(
                       label: Text('Barcode', style: TextStyle(fontSize: 10))),
@@ -70,7 +71,7 @@ class _DeployedAssetsRecordsState extends State<DeployedAssetsRecords> {
                               style: TextStyle(fontSize: 10))),
                           DataCell(Text(e['createdAt'].toDate().toString(),
                               style: TextStyle(fontSize: 10))),
-                          DataCell(Text(e['displayName'].toString(),
+                          DataCell(Text(e['ictOfficerName'].toString(),
                               style: TextStyle(fontSize: 10)))
                         ]))
                     .toList(),

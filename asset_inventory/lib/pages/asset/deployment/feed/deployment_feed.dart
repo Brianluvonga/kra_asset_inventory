@@ -2,6 +2,7 @@ import 'package:asset_inventory/pages/asset/deployment/api/deployment_api.dart';
 import 'package:asset_inventory/pages/asset/deployment/feed/deployment2.dart';
 import 'package:asset_inventory/pages/asset/deployment/notifier/deploy_notifier.dart';
 import 'package:asset_inventory/pages/asset/forms/asset_deployment_form.dart';
+import 'package:asset_inventory/pages/asset/records/deployed_details/check_deployment_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,12 +34,38 @@ class _DeploymentFeedState extends State<DeploymentFeed> {
         title: Text('Deployment Details'),
         centerTitle: true,
         backgroundColor: Colors.red[600],
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-        ],
+      ),
+      endDrawer: new Drawer(
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                ),
+                child: Center(
+                  child: Text(
+                    'Asset Deployment Details',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 25, color: Colors.white),
+                  ),
+                )),
+            ListTile(
+              leading: Icon(Icons.info_outline, color: Colors.red[600]),
+              title: Text('Fetch Barcode Details'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => CheckDeploymentDetails(),
+                  ),
+                );
+              },
+            ),
+            Divider(),
+          ],
+        ),
       ),
       body: new RefreshIndicator(
         child: ListView.separated(

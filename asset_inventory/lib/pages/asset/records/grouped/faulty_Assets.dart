@@ -29,6 +29,7 @@ class _ViewFaultyAssetsState extends State<ViewFaultyAssets> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               return DataTable(
+                columnSpacing: 25,
                 columns: [
                   DataColumn(
                       label: Text('Barcode', style: TextStyle(fontSize: 10))),

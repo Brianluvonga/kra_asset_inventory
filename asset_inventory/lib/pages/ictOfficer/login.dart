@@ -1,6 +1,7 @@
 import 'package:asset_inventory/api/ict_officer_api.dart';
 import 'package:asset_inventory/models/ictOficer_model.dart';
 import 'package:asset_inventory/pages/ictOfficer/notifier/ictOfficer_notifier.dart';
+import 'package:asset_inventory/pages/ictOfficer/suspendedRegistration.dart';
 import 'package:asset_inventory/pages/navigation/Navigation.dart';
 import 'package:asset_inventory/pages/ictOfficer/register.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -244,8 +245,8 @@ class _LoginState extends State<Login> {
   Widget notAccomplished() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Register()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => SuspendedRegistration()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

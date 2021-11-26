@@ -1,16 +1,18 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-class CheckDeploymentDetails extends StatefulWidget {
-  const CheckDeploymentDetails({Key? key}) : super(key: key);
+class CheckAssetEntryDetails extends StatefulWidget {
+  const CheckAssetEntryDetails({Key? key}) : super(key: key);
 
   @override
-  _CheckDeploymentDetailsState createState() => _CheckDeploymentDetailsState();
+  _CheckAssetEntryDetailsState createState() => _CheckAssetEntryDetailsState();
 }
 
-class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
+class _CheckAssetEntryDetailsState extends State<CheckAssetEntryDetails> {
   TextEditingController barcodeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -20,7 +22,7 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
-        title: Text('Asset Deployment Details'),
+        title: Text('Asset Entry Details'),
         centerTitle: true,
         backgroundColor: Colors.red[600],
       ),
@@ -38,15 +40,12 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
                   elevation: 20,
                   child: Container(
                       height: 150,
-                      width: 250,
+                      width: 350,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
                       child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.all(15),
-                          child: _barcodeField(),
-                        ),
+                        child: _barcodeField(),
                       )),
                 ),
               ],
@@ -125,22 +124,28 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          title: Text("Barcode Details", textAlign: TextAlign.center),
-          insetPadding: EdgeInsets.symmetric(horizontal: 100),
-          content: Container(
-            width: double.infinity,
-            child: barcodeDetails(),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Ok'),
-              onPressed: () => Navigator.of(context).pop(),
-            ),
-          ],
-        );
+        return Stack(
+            overflow: Overflow.visible,
+            alignment: Alignment.center,
+            children: <Widget>[
+              Container(
+                height: 200,
+                child: AlertDialog(
+                  title: Text("Barcode Details", textAlign: TextAlign.center),
+                  insetPadding: EdgeInsets.symmetric(horizontal: 100),
+                  content: Container(
+                    child: barcodeDetails(),
+                  ),
+                  actions: <Widget>[
+                    TextButton(
+                      child:
+                          Text('Ok', style: TextStyle(color: Colors.red[600])),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ],
+                ),
+              )
+            ]);
       },
     );
   }
@@ -150,7 +155,7 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          content: Text("This Asset Has Not Been Deployed"),
+          content: Text("This Asset Has Not Been Recorded"),
           actions: <Widget>[
             ElevatedButton(
               child: Text('No'),
@@ -164,7 +169,6 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
 
   Widget barcodeDetails() {
     return Container(
-      width: 400,
       child: StreamBuilder(
         stream: checkBarcode(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -172,33 +176,31 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
             return DataTable(
               columnSpacing: 20,
               columns: [
+                DataColumn(label: Text('Manu', style: TextStyle(fontSize: 8))),
                 DataColumn(
-                    label: Text('Station', style: TextStyle(fontSize: 8))),
-                DataColumn(label: Text('Pin', style: TextStyle(fontSize: 8))),
-                DataColumn(
-                    label: Text('Depart', style: TextStyle(fontSize: 8))),
-                DataColumn(
-                    label: Text('DeployedBy', style: TextStyle(fontSize: 8))),
+                    label: Text('SerialNo', style: TextStyle(fontSize: 8))),
+                DataColumn(label: Text('Type', style: TextStyle(fontSize: 8))),
+                DataColumn(label: Text('Model', style: TextStyle(fontSize: 8))),
               ],
               rows: snapshot.data!.docs
                   .map(
                     (e) => DataRow(
                       cells: [
-                        DataCell(
-                            Text(e['station'], style: TextStyle(fontSize: 8))),
-                        DataCell(
-                            Text(e['userPIN'], style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['department'],
+                        DataCell(Text(e['manufacturer'],
                             style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['ictOfficerName'],
-                            style: TextStyle(fontSize: 8))),
+                        DataCell(
+                            Text(e['serialNo'], style: TextStyle(fontSize: 8))),
+                        DataCell(
+                            Text(e['type'], style: TextStyle(fontSize: 8))),
+                        DataCell(
+                            Text(e['model'], style: TextStyle(fontSize: 8))),
                       ],
                     ),
                   )
                   .toList(),
             );
           } else {
-            return Text('Not Deployed');
+            return Text('Not Recorded');
           }
         },
       ),
@@ -207,12 +209,12 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
 
   Stream<QuerySnapshot<Object?>> checkBarcode() {
     return FirebaseFirestore.instance
-        .collection('Deployment')
+        .collection('Assets')
         .where('barcode', isEqualTo: barcodeController.text)
         .snapshots();
   }
 
 //query deployment database to fetch details of asset being used
   CollectionReference assetsCaptured =
-      FirebaseFirestore.instance.collection('Deployment');
+      FirebaseFirestore.instance.collection('Asset');
 }

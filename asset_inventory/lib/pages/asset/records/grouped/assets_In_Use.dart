@@ -29,6 +29,7 @@ class _ViewAssetsInUseState extends State<ViewAssetsInUse> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               return DataTable(
+                columnSpacing: 25,
                 columns: [
                   DataColumn(
                       label: Text('Barcode', style: TextStyle(fontSize: 10))),
@@ -40,7 +41,7 @@ class _ViewAssetsInUseState extends State<ViewAssetsInUse> {
                   DataColumn(
                       label: Text('Model', style: TextStyle(fontSize: 10))),
                   DataColumn(
-                      label: Text('SerialNo', style: TextStyle(fontSize: 10))),
+                      label: Text('SerialNo', style: TextStyle(fontSize: 8))),
                   DataColumn(
                       label: Text('Type', style: TextStyle(fontSize: 10))),
                 ],

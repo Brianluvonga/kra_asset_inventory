@@ -29,6 +29,7 @@ class _ViewObsoleteAssetsState extends State<ViewObsoleteAssets> {
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasData) {
               return DataTable(
+                columnSpacing: 25,
                 columns: [
                   DataColumn(
                       label: Text('Barcode', style: TextStyle(fontSize: 10))),

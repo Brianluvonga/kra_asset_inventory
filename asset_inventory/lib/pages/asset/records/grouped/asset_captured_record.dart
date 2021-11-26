@@ -41,6 +41,7 @@ class _AssetFeedState extends State<AssetFeed> {
                 (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.hasData) {
                 return DataTable(
+                  columnSpacing: 15,
                   showCheckboxColumn: false,
                   columns: [
                     DataColumn(

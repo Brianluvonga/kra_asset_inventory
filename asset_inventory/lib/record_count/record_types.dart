@@ -3,9 +3,11 @@ import 'package:asset_inventory/pages/asset/records/record_types/ipPhones.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/laptop.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/monitor.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/printer.dart';
+import 'package:asset_inventory/pages/asset/records/record_types/projectors.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/switch.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/tablet.dart';
 import 'package:asset_inventory/pages/asset/records/record_types/vdi.dart';
+import 'package:asset_inventory/pages/asset/records/record_types/wifi_routers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +54,127 @@ class _RecordTypesCapturedState extends State<RecordTypesCaptured> {
 
   Stream<QuerySnapshot> countIP_Phones() {
     return assetsCaptured.where('type', isEqualTo: 'IP Phone').snapshots();
+  }
+
+  Stream<QuerySnapshot> countWiFi_Routers() {
+    return assetsCaptured.where('type', isEqualTo: 'WiFi Router').snapshots();
+  }
+
+  Stream<QuerySnapshot> countProjectors() {
+    return assetsCaptured.where('type', isEqualTo: 'Projector').snapshots();
+  }
+
+  Widget WiFiRouter() {
+    return Card(
+      elevation: 8.0,
+      shadowColor: Colors.black,
+      child: Container(
+        height: 100,
+        width: 90,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: countWiFi_Routers(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                child: Center(
+                  child: ListView(
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          "WiFi Routers",
+                          textAlign: TextAlign.center,
+                        ),
+                        subtitle: Text(
+                          snapshot.data!.size.toString(),
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: Color(0xff2a0404), fontSize: 30),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => ViewRouters(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red[600],
+                  // value: 0,
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget Projectors() {
+    return Card(
+      elevation: 8.0,
+      shadowColor: Colors.black,
+      child: Container(
+        height: 100,
+        width: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: StreamBuilder<QuerySnapshot>(
+          stream: countProjectors(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return Container(
+                child: Center(
+                  child: ListView(
+                    children: <Widget>[
+                      ListTile(
+                        title: Text(
+                          "Projectors",
+                          textAlign: TextAlign.center,
+                        ),
+                        subtitle: Text(
+                          snapshot.data!.size.toString(),
+                          textAlign: TextAlign.center,
+                          style:
+                              TextStyle(color: Color(0xff2a0404), fontSize: 30),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) =>
+                                  ViewProjectors(),
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: Colors.red[600],
+                  // value: 0,
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 
   Widget vdiEntry() {
@@ -520,7 +643,7 @@ class _RecordTypesCapturedState extends State<RecordTypesCaptured> {
         children: <Widget>[
           Positioned(
             left: 10,
-            top: 150,
+            top: 310,
             right: 2,
             child: Column(
               children: <Widget>[
@@ -531,7 +654,6 @@ class _RecordTypesCapturedState extends State<RecordTypesCaptured> {
                     children: <Widget>[
                       Row(children: <Widget>[
                         switchEntry(),
-                        printerEntry(),
                         laptopEntry(),
                         tabletEntry()
                       ]),
@@ -543,7 +665,31 @@ class _RecordTypesCapturedState extends State<RecordTypesCaptured> {
           ),
           Positioned(
             left: 10,
-            top: 10,
+            top: 180,
+            right: 2,
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          ipPhonesEntry(),
+                          WiFiRouter(),
+                          printerEntry(),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 10,
+            top: 50,
             right: 2,
             child: Column(
               children: <Widget>[
@@ -557,7 +703,28 @@ class _RecordTypesCapturedState extends State<RecordTypesCaptured> {
                           CPUEntry(),
                           vdiEntry(),
                           monitorEntry(),
-                          ipPhonesEntry()
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            left: 10,
+            top: 440,
+            right: 2,
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Projectors(),
                         ],
                       ),
                     ],
