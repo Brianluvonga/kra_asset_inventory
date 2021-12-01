@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.asset_inventory">
+    package="com.kra.asset_inventory">
    <application
         android:label="asset_inventory"
         android:icon="@mipmap/launcher_icon">

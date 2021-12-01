@@ -49,6 +49,7 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
                         ),
                       )),
                 ),
+                _barcodeField(),
               ],
             ),
           ),
@@ -96,6 +97,51 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
             FocusScope.of(context).requestFocus(new FocusNode());
           },
         ));
+  }
+
+  Widget barcodeDetails() {
+    return Container(
+      width: 400,
+      child: StreamBuilder(
+        stream: checkBarcode(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            return DataTable(
+              columnSpacing: 20,
+              columns: [
+                DataColumn(
+                    label: Text('Station', style: TextStyle(fontSize: 8))),
+                DataColumn(
+                    label: Text('DateDeployed', style: TextStyle(fontSize: 8))),
+                DataColumn(label: Text('Pin', style: TextStyle(fontSize: 8))),
+                DataColumn(
+                    label: Text('Depart', style: TextStyle(fontSize: 8))),
+                DataColumn(
+                    label: Text('DeployedBy', style: TextStyle(fontSize: 8))),
+              ],
+              rows: snapshot.data!.docs
+                  .map(
+                    (e) => DataRow(
+                      cells: [
+                        DataCell(
+                            Text(e['station'], style: TextStyle(fontSize: 8))),
+                        DataCell(
+                            Text(e['userPIN'], style: TextStyle(fontSize: 8))),
+                        DataCell(Text(e['department'],
+                            style: TextStyle(fontSize: 8))),
+                        DataCell(Text(e['ictOfficerName'],
+                            style: TextStyle(fontSize: 8))),
+                      ],
+                    ),
+                  )
+                  .toList(),
+            );
+          } else {
+            return Text('Not Deployed');
+          }
+        },
+      ),
+    );
   }
 
 // barcoode to fetch details after scan
@@ -159,49 +205,6 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
           ],
         );
       },
-    );
-  }
-
-  Widget barcodeDetails() {
-    return Container(
-      width: 400,
-      child: StreamBuilder(
-        stream: checkBarcode(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasData) {
-            return DataTable(
-              columnSpacing: 20,
-              columns: [
-                DataColumn(
-                    label: Text('Station', style: TextStyle(fontSize: 8))),
-                DataColumn(label: Text('Pin', style: TextStyle(fontSize: 8))),
-                DataColumn(
-                    label: Text('Depart', style: TextStyle(fontSize: 8))),
-                DataColumn(
-                    label: Text('DeployedBy', style: TextStyle(fontSize: 8))),
-              ],
-              rows: snapshot.data!.docs
-                  .map(
-                    (e) => DataRow(
-                      cells: [
-                        DataCell(
-                            Text(e['station'], style: TextStyle(fontSize: 8))),
-                        DataCell(
-                            Text(e['userPIN'], style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['department'],
-                            style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['ictOfficerName'],
-                            style: TextStyle(fontSize: 8))),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            );
-          } else {
-            return Text('Not Deployed');
-          }
-        },
-      ),
     );
   }
 
