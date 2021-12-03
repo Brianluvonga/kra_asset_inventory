@@ -245,8 +245,8 @@ class _LoginState extends State<Login> {
   Widget notAccomplished() {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => SuspendedRegistration()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Register()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

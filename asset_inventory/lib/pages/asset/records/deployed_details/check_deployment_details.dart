@@ -49,7 +49,6 @@ class _CheckDeploymentDetailsState extends State<CheckDeploymentDetails> {
                         ),
                       )),
                 ),
-                _barcodeField(),
               ],
             ),
           ),

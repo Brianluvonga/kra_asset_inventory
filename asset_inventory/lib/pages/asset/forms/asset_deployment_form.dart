@@ -621,19 +621,15 @@ class _AssetDeploymentFormState extends State<AssetDeploymentForm> {
           if (snapshot.hasData) {
             return DataTable(
               columns: [
-                DataColumn(
-                    label: Text('Condition', style: TextStyle(fontSize: 8))),
-                DataColumn(label: Text('Man', style: TextStyle(fontSize: 8))),
+                DataColumn(label: Text('Model', style: TextStyle(fontSize: 8))),
                 DataColumn(
                     label: Text('SerialNo', style: TextStyle(fontSize: 8))),
                 DataColumn(label: Text('Type', style: TextStyle(fontSize: 8))),
               ],
               rows: snapshot.data!.docs
                   .map((e) => DataRow(cells: [
-                        DataCell(Text(e['condition'],
-                            style: TextStyle(fontSize: 8))),
-                        DataCell(Text(e['manufacturer'],
-                            style: TextStyle(fontSize: 8))),
+                        DataCell(
+                            Text(e['model'], style: TextStyle(fontSize: 8))),
                         DataCell(
                             Text(e['serialNo'], style: TextStyle(fontSize: 8))),
                         DataCell(

@@ -45,26 +45,32 @@ class _RecordssectionState extends State<Recordssection> {
                 child: Center(
                   child: ListView(
                     children: <Widget>[
-                      ListTile(
-                        title: Text(
-                          "Assets",
-                          textAlign: TextAlign.center,
-                        ),
-                        subtitle: Text(
-                          snapshot.data!.size.toString(),
-                          textAlign: TextAlign.center,
-                          style:
-                              TextStyle(color: Color(0xff2a0404), fontSize: 45),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => AssetFeed(),
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: MediaQuery.of(context).size.height * 0.16,
+                          child: Center(
+                            child: ListTile(
+                              title: Text(
+                                "Assets",
+                                textAlign: TextAlign.center,
+                              ),
+                              subtitle: Text(
+                                snapshot.data!.size.toString(),
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(0xff2a0404), fontSize: 45),
+                              ),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        AssetFeed(),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                      ),
+                          ))
                     ],
                   ),
                 ),
@@ -121,6 +127,8 @@ class _RecordssectionState extends State<Recordssection> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height * 0.16,
                 child: Center(
                   child: ListView(
                     children: <Widget>[
@@ -174,6 +182,9 @@ class _RecordssectionState extends State<Recordssection> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Container(
+                alignment: Alignment.center,
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height * 0.16,
                 child: Center(
                   child: ListView(
                     children: <Widget>[
@@ -288,12 +299,13 @@ class _RecordssectionState extends State<Recordssection> {
                           "Faulty",
                           textAlign: TextAlign.center,
                         ),
-                        subtitle: Text(
+                        subtitle: Center(
+                            child: Text(
                           snapshot.data!.size.toString(),
                           textAlign: TextAlign.center,
                           style:
                               TextStyle(color: Color(0xff2a0404), fontSize: 20),
-                        ),
+                        )),
                         onTap: () {
                           Navigator.push(
                             context,

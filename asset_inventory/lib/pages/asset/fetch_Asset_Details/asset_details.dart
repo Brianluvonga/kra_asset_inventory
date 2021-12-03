@@ -174,12 +174,11 @@ class _CheckAssetEntryDetailsState extends State<CheckAssetEntryDetails> {
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
             return DataTable(
-              columnSpacing: 20,
+              columnSpacing: 10,
               columns: [
                 DataColumn(label: Text('Manu', style: TextStyle(fontSize: 8))),
                 DataColumn(
                     label: Text('SerialNo', style: TextStyle(fontSize: 8))),
-                DataColumn(label: Text('Type', style: TextStyle(fontSize: 8))),
                 DataColumn(label: Text('Model', style: TextStyle(fontSize: 8))),
               ],
               rows: snapshot.data!.docs
@@ -190,8 +189,6 @@ class _CheckAssetEntryDetailsState extends State<CheckAssetEntryDetails> {
                             style: TextStyle(fontSize: 8))),
                         DataCell(
                             Text(e['serialNo'], style: TextStyle(fontSize: 8))),
-                        DataCell(
-                            Text(e['type'], style: TextStyle(fontSize: 8))),
                         DataCell(
                             Text(e['model'], style: TextStyle(fontSize: 8))),
                       ],
